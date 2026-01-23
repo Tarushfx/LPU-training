@@ -1,0 +1,19 @@
+Topics:
+    Pattern printing
+        
+Questions:
+    1. print columns
+    2. print hollow rectangle
+    3. print right angled triangle
+        take n and m (m<n) make a right triangle with n,m sides 
+        and fill rest with "$"
+    
+    4. print manhattan distance from origin
+    5. print manhattan distance from a random point
+    6. print a circle
+
+    7. print a spiral (leetcode)
+    8. print pascals triangle
+    9. print xor pyramid
+
+

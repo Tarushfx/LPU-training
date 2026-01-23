@@ -1,0 +1,11 @@
+Topics : 
+    time complexity and big O notation in C++.
+    pattern printing
+
+Questions:
+
+Notes:
+ "How many seconds does this take?" 
+ to "How does the runtime grow as the input size ($n$) grows?"
+
+ 
