@@ -1,11 +1,27 @@
 Topics : 
+    pattern printing 
+
     time complexity and big O notation in C++.
-    pattern printing
+    best case omega
+    average case theta
+    cache loading vs time complexity diisctinction
+
+    cf ide time limitations
+    power of 2
+    recursion
+    questions
 
 Questions:
     7. print a spiral (leetcode)
     8. print pascals triangle
     9. print xor pyramid
+
+    linear search 
+    binary search not done
+    recursion 
+    multiply 2 matrices
+    divide at each step done
+    merge sort
     
 
 Notes:
