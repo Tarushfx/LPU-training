@@ -47,6 +47,17 @@ int *merge_sort(int arr[], int l, int r)
     auto merged = merge_array(left, right, mid - l + 1, r - mid);
     return merged;
 }
+bool is_prime(int n)
+{
+    int factors = 0;
+    for (int i = 2; i <= sqrt(n); i++)
+    {
+        if (n % i == 0)
+            factors++;
+    }
+    return factors == 0;
+    // O(rootn)
+}
 
 int main()
 {
@@ -72,11 +83,103 @@ int main()
     // 2n
     // O(n)
 
-    int arr[] = {4, 1, 5, 2, 6, 7, 9, 3};
-    int n = sizeof(arr) / sizeof(arr[0]);
-    auto res = merge_sort(arr, 0, n - 1);
-    for (int i = 0; i < n; i++)
-        cout << *(res + i) << " ";
+    // int arr[] = {4, 1, 5, 2, 6, 7, 9, 3};
+    // int n = sizeof(arr) / sizeof(arr[0]);
+    // auto res = merge_sort(arr, 0, n - 1);
+    // for (int i = 0; i < n; i++)
+    //     cout << *(res + i) << " ";
+    // int n = 2;
+    // int A[n][n] = {{1, 2}, {3, 4}}, B[n][n] = {{5, 6}, {7, 8}};
+    // int C[n][n];
+    // for (int r = 0; r < n; r++)
+    // {
+    //     for (int c = 0; c < n; c++)
+    //     {
+    //         int sm = 0;
+    //         for (int k = 0; k < n; k++)
+    //         {
+    //             sm += A[r][k] * B[k][c];
+    //         }
+    //         C[r][c] = sm;
+    //     }
+    // }
+    // for (int i = 0; i < n; i++)
+    // {
+    //     for (int j = 0; j < n; j++)
+    //     {
+    //         cout << C[i][j] << " ";
+    //     }
+    //     cout << endl;
+    // }
+    // int n = 45;
+    // for (int i = 1; i <= n; i++)
+    // {
+    //     if (n % i == 0)
+    //         cout << i << endl;
+    // }
+    // O(n)
+    // for (int i = 1; i <= sqrt(n); i++)
+    // {
+    //     if (n % i == 0)
+    //     {
+    //         cout << i << endl;
+    //         cout << n / i << endl;
+    //     }
+    // }
+    // O(rootn)
+    // Prime factors
+    // int n = 170;
+    // for (int i = 2; i <= sqrt(n); i++)
+    // {
+    //     if (n % i == 0)
+    //     {
+    //         if (is_prime(i))
+    //             cout << i << endl;
+    //         if (is_prime(n / i))
+    //             cout << n / i << endl;
+    //     }
+    // }
+    int n = 10246;
+    int primes[n + 1];
+    for (int i = 0; i <= n; i++)
+        primes[i] = true;
+
+    primes[0] = false;
+    primes[1] = false;
+    for (int i = 2; i <= n; i++)
+    {
+        if (primes[i])
+        {
+            // cout << i << " is prime" << endl;
+            for (int j = i * i; j <= n; j += i)
+                primes[j] = false;
+            // for (int k = 2; k <= n; k++)
+            // {
+            //     cout << k << ":" << primes[k] << ";";
+            // }
+            // cout << endl;
+        }
+    }
+    // O(nloglogn)
+    // int check[6] = {3, 4, 5, 18, 7, 21};
+    // for (int i = 0; i < 6; i++)
+    //     cout << check[i] << " " << primes[check[i]] << endl;
+    int x = n;
+    for (int i = 2; i <= n; i++)
+    {
+        int count = 0;
+        if (!primes[i])
+            continue;
+        while (x % i == 0)
+        {
+            x /= i;
+            count++;
+        }
+        if (count > 0)
+            cout << i << " " << count << endl;
+    }
+    return 0;
+    // 420 2, 5, 3 7
 }
 
 void example1(int n)

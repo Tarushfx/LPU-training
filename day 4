@@ -11,6 +11,11 @@ Topics :
     recursion
     questions
 
+notes:
+    https://redquark.org/dsa/asymptotic-notations/
+    https://redquark.org/dsa/analysis-of-algorithms/
+    cpu memory/word caching
+
 Questions:
     7. print a spiral (leetcode)
     8. print pascals triangle

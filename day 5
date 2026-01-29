@@ -1,0 +1,57 @@
+topics:
+    remaining questions of time complexity
+
+    STL:
+    abstraction on containers, access values using iterators
+    vector: dynamic array
+    list doubly ended linked list
+    array fixed size array
+    deque access from front and back (can access in between)
+    sets, multiset and unordered_set
+    map, multimap and unordered_map
+    priority_queue
+    strings
+
+    Containers
+        linear containers (array,vector)
+        Container Adaptors (deques,stack, priority queue)
+        associative containers: sorted(set/map/multimap/multiset)
+
+        Hashing: basics and collisions
+        unordered containers: hashing(map/set)      
+            touch on hash collisions and chaining
+
+    
+    Iterators
+        begin
+        end
+        input/output -> cin/cout
+        bidirectional
+        random access
+        forward
+
+
+
+    Algorithms
+        find
+        reverse
+        max_element
+        min_element
+    
+    Functors and Compators
+        equal_to
+        not_equal_to
+        greater
+        less
+        plus
+        minus
+
+    
+notes:
+    https://www.geeksforgeeks.org/cpp/cpp-stl-cheat-sheet/
+
+
+questions:
+    mulitiply 2 matrices
+    find prime divisors of a number
+
