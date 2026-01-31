@@ -1,0 +1,19 @@
+questions:
+    https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/
+    Sorted Frequency Count
+    Two Sum
+    Three sum
+    
+    strings:
+        discussed:
+            reverse a string
+            Count Vowels in a String
+            Replace Each Letter with the Next in the Alphabet
+            string to integer and intger to string  
+        assignment:    
+            Reverse Only the Vowels in a String
+            Check Separation of 'e' and 'g' by Exactly 2 Characters
+
+stacks: to be done later
+    https://leetcode.com/problems/valid-parentheses/description/ 
+    + longest valid parenthesis

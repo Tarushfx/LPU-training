@@ -266,3 +266,118 @@ vector<int> DuplicateMe(vector<int> &arr)
     // }
     // return ans;
 }
+// remove duplicates from sorted array
+class Solution
+{
+public:
+    int removeDuplicates(vector<int> &arr)
+    {
+        int unq = 0;
+        for (int i = 0; i < arr.size(); i++)
+        {
+            if (i == 0 || arr[i] != arr[i - 1])
+                arr[unq++] = arr[i];
+        }
+        return unq;
+    }
+};
+// 2sum
+class Solution
+{
+public:
+    vector<int> twoSum(vector<int> &nums, int target)
+    {
+        // unordered_map<int, int> mp;
+        // int n = nums.size();
+        // for(int i=0;i<n;i++){
+        //     int rem = target-nums[i];
+        //     if(mp.find(rem)!=mp.end()){
+        //         return {mp[rem], i};
+        //     }
+        //     mp[nums[i]]=i;
+        // }
+        // return {};
+        int l = 0;
+        int r = nums.size() - 1;
+        map<int, int> mp;
+        vector<pair<int, int>> v;
+        for (int i = 0; i < nums.size(); i++)
+            v.push_back({nums[i], i});
+        sort(v.begin(), v.end());
+        while (l < r)
+        {
+            if (v[l].first + v[r].first == target)
+            {
+                return {v[l].second, v[r].second};
+            }
+            else if (v[l].first + v[r].first > target)
+            {
+                r--;
+            }
+            else
+                l++;
+        }
+        return {};
+    }
+};
+// 3sum
+class Solution
+{
+public:
+    vector<vector<int>> threeSum(vector<int> &nums)
+    {
+        sort(nums.begin(), nums.end());
+        int n = nums.size();
+        vector<vector<int>> ans;
+        for (int i = n - 1; i >= 2; i--)
+        {
+            if (i < n - 1 && nums[i] == nums[i + 1])
+                continue;
+            if (nums[i] < 0)
+                continue;
+            int l = 0, r = i - 1;
+            while (l < r)
+            {
+                int curr = nums[l] + nums[r];
+                if (curr == -nums[i])
+                {
+                    ans.push_back({nums[l], nums[r], nums[i]});
+                    while (l < n - 1 && nums[l + 1] == nums[l])
+                        l++;
+                    while (r > 0 && nums[r - 1] == nums[r])
+                        r--;
+
+                    r--;
+                }
+                else if (curr > -nums[i])
+                {
+                    r--;
+                }
+                else
+                    l++;
+            }
+        }
+        return ans;
+    }
+};
+
+// should not get accepted
+
+class Solution
+{
+public:
+    vector<int> countSmaller(vector<int> &arr)
+    {
+        vector<int> s;
+        vector<int> ans;
+        int n = arr.size();
+        for (int i = n - 1; i >= 0; i--)
+        {
+            auto idx = lower_bound(s.begin(), s.end(), arr[i]) - s.begin();
+            ans.push_back(idx);
+            s.insert(s.begin() + idx, arr[i]);
+        }
+        reverse(ans.begin(), ans.end());
+        return ans;
+    }
+};
