@@ -136,3 +136,53 @@ int *merge_sort(int arr[], int l, int r)
     auto merged = merge_array(left, right, mid - l + 1, r - mid);
     return merged;
 }
+
+// sort 01s
+// User function template for C++
+
+class Solution
+{
+public:
+    void segregate0and1(vector<int> &arr)
+    {
+        // code here
+        int n = arr.size();
+        int ptr = n - 1;
+        for (int i = 0; i < n; i++)
+        {
+            if (arr[i] == 0)
+                continue;
+            while (arr[i] != 0 && i < ptr)
+            {
+                swap(arr[i], arr[ptr]);
+                ptr--;
+            }
+        }
+    }
+};
+// sort 012s
+class Solution
+{
+public:
+    void sortColors(vector<int> &nums)
+    {
+        int n = nums.size();
+        int lo = 0, hi = n - 1;
+        for (int i = 0; i < n; i++)
+        {
+            while (nums[i] != 1 && i <= hi && i >= lo)
+            {
+                if (nums[i] == 2)
+                {
+                    swap(nums[i], nums[hi]);
+                    hi--;
+                }
+                else if (nums[i] == 0)
+                {
+                    swap(nums[i], nums[lo]);
+                    lo++;
+                }
+            }
+        }
+    }
+};
