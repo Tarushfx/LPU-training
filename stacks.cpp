@@ -8,6 +8,86 @@ int main()
     freopen("output.txt", "w", stdout);
 #endif
 }
+// NGE - Next Greater Element
+class Solution
+{
+public:
+    vector<int> nextLargerElement(vector<int> &arr)
+    {
+        // code here
+        stack<int> stk;
+        int n = arr.size();
+        vector<int> NGE(n);
+        for (int i = n - 1; i >= 0; i--)
+        {
+            while (!stk.empty() && stk.top() <= arr[i])
+                stk.pop();
+            NGE[i] = stk.empty() ? -1 : stk.top();
+            stk.push(arr[i]);
+        }
+        return NGE;
+    }
+};
+// Next Smaller Element
+class Solution
+{
+public:
+    vector<int> nextSmallerEle(vector<int> &arr)
+    {
+        //  code here
+        stack<int> stk;
+        int n = arr.size();
+        vector<int> NSE(n);
+        for (int i = n - 1; i >= 0; i--)
+        {
+            while (!stk.empty() && stk.top() >= arr[i])
+                stk.pop();
+            NSE[i] = stk.empty() ? -1 : stk.top();
+            stk.push(arr[i]);
+        }
+        return NSE;
+    }
+};
+// Previous Smaller Element
+class Solution
+{
+public:
+    vector<int> prevSmaller(vector<int> &arr)
+    {
+        //  code here
+        stack<int> stk;
+        int n = arr.size();
+        vector<int> PSE(n);
+        for (int i = 0; i < n; i++)
+        {
+            while (!stk.empty() && stk.top() >= arr[i])
+                stk.pop();
+            PSE[i] = stk.empty() ? -1 : stk.top();
+            stk.push(arr[i]);
+        }
+        return PSE;
+    }
+};
+// Previous Greater Element
+class Solution
+{
+public:
+    vector<int> preGreaterEle(vector<int> &arr)
+    {
+        //  code here
+        stack<int> stk;
+        int n = arr.size();
+        vector<int> PGE(n);
+        for (int i = 0; i < n; i++)
+        {
+            while (!stk.empty() && stk.top() <= arr[i])
+                stk.pop();
+            PGE[i] = stk.empty() ? -1 : stk.top();
+            stk.push(arr[i]);
+        }
+        return PGE;
+    }
+};
 // Sum of Subarray Minimums
 class Solution
 {

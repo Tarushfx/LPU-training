@@ -5,10 +5,9 @@ topics:
 questions:
     kth largest element done
     merge k sorted lists done 
-    k closest points to origin
+    k closest points to origin done
     Top k frequent elements done
-    task scheduling
+    task scheduling done
+    Meeting room series (will do with greedy)
     Find median from a data stream
     Sliding window Median
-    Minimum number of CPU
-    Meeting room series 

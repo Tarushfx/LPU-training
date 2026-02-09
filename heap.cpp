@@ -1,12 +1,53 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define pii pair<int, int>
-class Compare
+class CompareTest
 {
 public:
     bool operator()(pii a, pii b)
     {
         return false;
+    }
+};
+#define pii pair<int, int>
+#define tii tuple<int, int, int>
+class Solution
+{
+public:
+    int leastInterval(vector<char> tasks, int n)
+    {
+        priority_queue<pii> maxheap;
+        map<int, int> mp;
+        for (auto t : tasks)
+            mp[t - 'A']++;
+        for (auto [t, f] : mp)
+            maxheap.push({f, t});
+        priority_queue<tii, vector<tii>, greater<tii>> minheap;
+        int timer = 0;
+        int ans = 0;
+        while ((maxheap.size() > 0 || minheap.size() > 0))
+        {
+            if (!minheap.empty())
+            {
+                auto [t, task, remaining] = minheap.top();
+                if (t == timer)
+                {
+                    maxheap.push({remaining, task});
+                    minheap.pop();
+                }
+            }
+            if (!maxheap.empty())
+            {
+                auto [f, new_task] = maxheap.top();
+                maxheap.pop();
+                if (f > 1)
+                {
+                    minheap.push({timer + n + 1, new_task, f - 1});
+                }
+            }
+            timer++;
+        }
+        return timer;
     }
 };
 int main()
@@ -15,16 +56,18 @@ int main()
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
-    priority_queue<int> pq;                              // max heap
-    priority_queue<int, vector<int>, greater<int>> mnpq; // min heap
-    priority_queue<pii, vector<pii>, Compare> custom_pq;
+    // priority_queue<int> pq;                              // max heap
+    // priority_queue<int, vector<int>, greater<int>> mnpq; // min heap
+    // priority_queue<pii, vector<pii>, Compare> custom_pq;
 
-    pq.push(1);
-    pq.pop();
-    pq.top();
-    pq.empty();
+    // pq.push(1);
+    // pq.pop();
+    // pq.top();
+    // pq.empty();
+    Solution s = Solution();
+    cout << s.leastInterval(vector<char>{'A', 'A', 'A', 'B', 'B', 'B'}, 2);
 }
-class Solution
+class Solution1
 {
 public:
     int findKthLargest(vector<int> &nums, int k)
@@ -41,7 +84,7 @@ public:
         return mnpq.top();
     }
 };
-class Solution
+class Solution2
 {
 public:
     int findKthLargest(vector<int> &nums, int k)
@@ -56,7 +99,7 @@ public:
         return mnpq.top();
     }
 };
-class Solution
+class Solution5
 {
 public:
     int findKthLargest(vector<int> &nums, int k)
@@ -78,7 +121,7 @@ public:
 
 // k most frequent elements
 #define pii pair<int, int>
-class Compare
+class ComparePair2
 {
 public:
     bool operator()(pii A, pii B)
@@ -87,7 +130,7 @@ public:
     }
 };
 
-class Solution
+class Solution3
 {
 public:
     vector<int> topKFrequent(vector<int> &nums, int k)
@@ -95,7 +138,7 @@ public:
         map<int, int> mp;
         for (auto x : nums)
             mp[x]++;
-        priority_queue<pii, vector<pii>, Compare> pq;
+        priority_queue<pii, vector<pii>, ComparePair2> pq;
         for (auto [x, freq] : mp)
         {
             pq.push({freq, x});
@@ -123,7 +166,7 @@ int dist(pii a)
 {
     return square(a.first) + square(a.second);
 }
-class Compare
+class ComparePair
 {
 public:
     bool operator()(pii A, pii B)
@@ -131,7 +174,7 @@ public:
         return dist(A) <= dist(B);
     }
 };
-class Solution
+class Solution4
 {
 public:
     vector<vector<int>> kClosest(vector<vector<int>> &points, int k)
