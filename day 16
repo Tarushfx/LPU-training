@@ -2,8 +2,9 @@ questions:
     maximum consecutive ones done
     longest substring without repeatinfg charecters done
 
-    group anagrams
-    Sum of all Subarrays
+    group anagrams done
+    Sum of all Subarrays done
+    odd length subarrays done
     longest increasing subsequence(by binary search)
 
     best time to sell stock

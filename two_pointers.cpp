@@ -135,3 +135,39 @@ public:
         return ans;
     }
 };
+
+// leetcode 719 Find K-th Smallest Pair Distance
+class Solution
+{
+public:
+    int countpairs(int diff, vector<int> &nums)
+    {
+        int n = nums.size();
+        int l = 0;
+        int ans = 0;
+        for (int r = 0; r < n; r++)
+        {
+            while (l < r && nums[r] - diff > nums[l])
+                l++;
+            ans += r - l;
+        }
+        return ans;
+    }
+    int smallestDistancePair(vector<int> &nums, int k)
+    {
+        sort(nums.begin(), nums.end());
+        int lo = INT_MAX;
+        for (int i = 1; i < nums.size(); i++)
+            lo = min(lo, nums[i] - nums[i - 1]);
+        int hi = nums.back() - nums.front() + 1;
+        while (lo < hi)
+        {
+            int mid = lo + (hi - lo) / 2;
+            if (countpairs(mid, nums) >= k)
+                hi = mid;
+            else
+                lo = mid + 1;
+        }
+        return lo;
+    }
+};
