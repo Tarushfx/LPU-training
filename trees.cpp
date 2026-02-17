@@ -466,3 +466,50 @@ public:
         return ans;
     }
 };
+// lca
+
+class Solution
+{
+public:
+    map<TreeNode *, TreeNode *> parent;
+    map<TreeNode *, int> height;
+    void dfs(TreeNode *root, TreeNode *par, int level)
+    {
+        if (!root)
+            return;
+        parent[root] = par;
+        height[root] = level;
+        dfs(root->left, root, level + 1);
+        dfs(root->right, root, level + 1);
+    }
+    TreeNode *lowestCommonAncestor(TreeNode *root, TreeNode *p, TreeNode *q)
+    {
+        dfs(root, NULL, 0);
+        if (height[p] < height[q])
+        {
+            // q is lower
+            int diff = height[q] - height[p];
+            while (diff > 0)
+            {
+                q = parent[q];
+                diff--;
+            }
+        }
+        else
+        {
+            int diff = height[p] - height[q];
+            while (diff > 0)
+            {
+                p = parent[p];
+                diff--;
+            }
+        }
+        // level is same
+        while (p != q)
+        {
+            p = parent[p];
+            q = parent[q];
+        }
+        return p;
+    }
+};
