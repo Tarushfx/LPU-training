@@ -217,3 +217,190 @@ public:
         return max(left, right) + 1;
     }
 };
+
+// height balanced tree
+
+class Solution
+{
+public:
+    bool isBalanced(TreeNode *root)
+    {
+        auto [broot, hroot] = helper(root);
+        return broot;
+    }
+    pair<bool, int> helper(TreeNode *root)
+    {
+        if (!root)
+            return {true, 0}; // null pointer is balanced
+        auto [bleft, hleft] = helper(root->left);
+        auto [bright, hright] = helper(root->right);
+        if (!bleft || !bright)
+            return {false, -1}; // height doesnt matter
+        // both subtrees are balanced
+        if (abs(hleft - hright) > 1)
+            return {false, -1}; // imbalanced
+        return {true, max(hleft, hright) + 1};
+    }
+};
+
+// same tree
+
+class Solution
+{
+public:
+    bool isSameTree(TreeNode *p, TreeNode *q)
+    {
+        if (!p && !q)
+            return true;
+        if (!p && q || !q && p)
+            return false;
+        bool left = isSameTree(p->left, q->left);
+        bool right = isSameTree(p->right, q->right);
+        return (left && right && p->val == q->val);
+    }
+};
+
+// subtree check
+
+class Solution
+{
+public:
+    bool isSameTree(TreeNode *p, TreeNode *q)
+    {
+        if (!p && !q)
+            return true;
+        if (!p && q || !q && p)
+            return false;
+        bool left = isSameTree(p->left, q->left);
+        bool right = isSameTree(p->right, q->right);
+        return (left && right && p->val == q->val);
+    }
+    bool isSubtree(TreeNode *root, TreeNode *subRoot)
+    {
+        if (!subRoot)
+            return true;
+        if (!root)
+            return false;
+        bool curr = isSameTree(root, subRoot);
+        if (curr)
+            return true;
+        bool left = isSubtree(root->left, subRoot);
+        if (left)
+            return true;
+        bool right = isSubtree(root->right, subRoot);
+        return curr || left || right;
+    }
+};
+
+// level order traversal
+class Solution
+{
+public:
+    vector<vector<int>> levelOrder(TreeNode *root)
+    {
+        vector<vector<int>> ans;
+        queue<TreeNode *> q;
+        q.push(root);
+        while (!q.empty())
+        {
+            int size = q.size();
+            vector<int> temp;
+            for (int i = 0; i < size; i++)
+            {
+                auto node = q.front();
+                q.pop();
+                if (!node)
+                    continue;
+                temp.push_back(node->val);
+                q.push(node->left);
+                q.push(node->right);
+            }
+            if (temp.size() > 0)
+                ans.push_back(temp);
+        }
+        return ans;
+    }
+};
+// level order dfs
+class Solution
+{
+    vector<vector<int>> ans;
+
+public:
+    vector<vector<int>> levelOrder(TreeNode *root)
+    {
+        helper(root, 0);
+        return ans;
+    }
+    void helper(TreeNode *root, int level)
+    {
+        if (!root)
+            return;
+        if (ans.size() <= level)
+            ans.push_back({});
+        ans[level].push_back(root->val);
+        helper(root->left, level + 1);
+        helper(root->right, level + 1);
+    }
+};
+// binary tree right side view
+class Solution
+{
+public:
+    vector<int> ans;
+    vector<int> rightSideView(TreeNode *root)
+    {
+        helper(root, 0);
+        return ans;
+    }
+    void helper(TreeNode *root, int level)
+    {
+        if (!root)
+            return;
+        if (ans.size() <= level)
+            ans.push_back(0);
+        ans[level] = root->val;
+        helper(root->left, level + 1);
+        helper(root->right, level + 1);
+    }
+};
+// right side view BFS
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution
+{
+public:
+    vector<int> rightSideView(TreeNode *root)
+    {
+        vector<int> ans;
+        queue<TreeNode *> q;
+        q.push(root);
+        while (!q.empty())
+        {
+            int size = q.size();
+            int temp = INT_MIN;
+            for (int i = 0; i < size; i++)
+            {
+                auto node = q.front();
+                q.pop();
+                if (!node)
+                    continue;
+                temp = node->val;
+                q.push(node->left);
+                q.push(node->right);
+            }
+            if (temp != INT_MIN)
+                ans.push_back(temp);
+        }
+        return ans;
+    }
+};
