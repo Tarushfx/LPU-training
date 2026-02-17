@@ -123,3 +123,97 @@ public:
                 sumBT(root->right));
     }
 };
+// inver binary tree dfs
+struct TreeNode
+{
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+};
+class Solution
+{
+public:
+    TreeNode *invertTree(TreeNode *root)
+    {
+        if (!root)
+            return root;
+        auto tempr = invertTree(root->left);
+        auto templ = invertTree(root->right);
+        root->right = tempr;
+        root->left = templ;
+        return root;
+    }
+};
+
+// Invert binary tree BFS
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution
+{
+public:
+    TreeNode *invertTree(TreeNode *root)
+    {
+        if (!root)
+            return root;
+        queue<TreeNode *> q;
+        q.push(root);
+        while (!q.empty())
+        {
+            TreeNode *node = q.front();
+            q.pop();
+            if (!node)
+                continue;
+            TreeNode *temp = node->right;
+            node->right = node->left;
+            node->left = temp;
+            q.push(node->left);
+            q.push(node->right);
+        }
+        return root;
+    }
+};
+
+// max depth of a tree
+class Solution
+{
+public:
+    int maxDepth(TreeNode *root)
+    {
+        if (!root)
+            return 0;
+        return 1 + max(maxDepth(root->left), maxDepth(root->right));
+    }
+};
+
+// diameter of a tree
+class Solution
+{
+public:
+    int diameter = INT_MIN;
+    int diameterOfBinaryTree(TreeNode *root)
+    {
+        height(root);
+        return diameter;
+    }
+    int height(TreeNode *root)
+    {
+        if (!root)
+            return 0;
+        int left = height(root->left);
+        int right = height(root->right);
+        diameter = max(diameter, left + right);
+        return max(left, right) + 1;
+    }
+};

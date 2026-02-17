@@ -171,3 +171,29 @@ public:
         return (1ll * (n - r + 1) * nCr(n, r - 1)) / r;
     }
 };
+
+// Binary exponentiation
+double pow(double x, long long int n)
+{
+    if (n == 0)
+        return 1;
+    double temp = pow(x, n / 2);
+    double res = temp * temp;
+    if ((n & 1) == 1)
+        res *= x;
+    return res;
+}
+// 779. K-th Symbol in Grammar
+class Solution
+{
+public:
+    int kthGrammar(int n, int k)
+    {
+        if (k == 1)
+            return 0;
+        int len = 1 << (n - 2);
+        if (k > len)
+            return 1 ^ kthGrammar(n - 1, k - len);
+        return kthGrammar(n - 1, k);
+    }
+};
