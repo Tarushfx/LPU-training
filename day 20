@@ -1,0 +1,22 @@
+topics:
+    Trees questions
+questions:
+    source: neetocode.io
+    invert binary tree
+    max depth of binary tree
+    diameter of binary tree
+    balanced binary tree
+    same tree
+    subtree of another tree
+    lowest common ancestor of binary search tree
+    lowest common ancestor of binary tree
+    level order traversal
+    right side view
+    count good nodes
+    validate BST
+    kth smallest element in a BST
+    construct binary tree from preorder and inorder 
+    binary tree max path sum
+
+assignment:
+    serialise and deserialise tree

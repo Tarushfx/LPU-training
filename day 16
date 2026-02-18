@@ -1,17 +1,18 @@
 questions:
     maximum consecutive ones done
-    longest substring without repeatinfg charecters done
+    longest substring without repeating charecters done
 
     group anagrams done
     Sum of all Subarrays done
     odd length subarrays done
-    longest increasing subsequence(by binary search)
 
-    best time to sell stock
     Longest Repeating Character Replacement
     Minimum Window Substring
     k-diff-pairs-in-an-array
     find-k-th-smallest-pair-distance(hard)
-    
+    sliding window minimum/maximum(hard)
+
+assignment:
     sliding window MEX
-    sliding window minimum
+    best time to sell stock
+    longest increasing subsequence(by binary search)

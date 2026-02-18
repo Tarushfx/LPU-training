@@ -44,18 +44,19 @@ public:
     {
         // Code here
         vector<int> ans;
-        set<int> visited;
+        int n = adj.size();
+        vector<bool> visited(n, false);
         helper(0, ans, visited, adj);
         return ans;
     }
     void helper(
-        int node, vector<int> &ans, set<int> &visited,
+        int node, vector<int> &ans, vector<bool> &visited,
         vector<vector<int>> &adj)
     {
-        if (visited.find(node) != visited.end())
+        if (visited[node])
             return;
         // process
-        visited.insert(node);
+        visited[node] = true;
         ans.push_back(node);
         for (int nei : adj[node])
         {
@@ -63,6 +64,43 @@ public:
         }
     }
 };
+// bipartite graph
+class Solution
+{
+public:
+    bool isBipartite(vector<vector<int>> &graph)
+    {
+        int n = graph.size();
+        map<int, char> color_map;
+        for (int start = 0; start < n; start++)
+        {
+            if (color_map.find(start) != color_map.end())
+                continue;
+            queue<pair<int, char>> q;
+            q.push({start, 'R'});
+            while (!q.empty())
+            {
+                auto [node, color] = q.front();
+                q.pop();
+                if (color_map.find(node) != color_map.end())
+                {
+                    if (color_map[node] != color)
+                        return false;
+                    continue; // already visited
+                }
+                color_map[node] = color;
+                for (int nei : graph[node])
+                {
+                    char new_color = color == 'R' ? 'B' : 'R';
+                    q.push({nei, new_color});
+                }
+            }
+        }
+        return true; // no issues with coloring
+    }
+};
+
+// count islands
 class Solution
 {
 public:
