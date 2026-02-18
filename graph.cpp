@@ -8,6 +8,61 @@ int main()
     freopen("output.txt", "w", stdout);
 #endif
 }
+// BFS
+class Solution
+{
+public:
+    vector<int> bfs(vector<vector<int>> &adj)
+    {
+        // code here
+        int source = 0;
+        queue<int> q;
+        vector<int> ans;
+        q.push(source);
+        set<int> visited;
+        while (!q.empty())
+        {
+            int node = q.front();
+            q.pop();
+            if (visited.find(node) != visited.end())
+                continue;
+            visited.insert(node);
+            ans.push_back(node);
+            for (int nei : adj[node])
+            {
+                q.push(nei);
+            }
+        }
+        return ans;
+    }
+};
+// DFS
+class Solution
+{
+public:
+    vector<int> dfs(vector<vector<int>> &adj)
+    {
+        // Code here
+        vector<int> ans;
+        set<int> visited;
+        helper(0, ans, visited, adj);
+        return ans;
+    }
+    void helper(
+        int node, vector<int> &ans, set<int> &visited,
+        vector<vector<int>> &adj)
+    {
+        if (visited.find(node) != visited.end())
+            return;
+        // process
+        visited.insert(node);
+        ans.push_back(node);
+        for (int nei : adj[node])
+        {
+            helper(nei, ans, visited, adj);
+        }
+    }
+};
 class Solution
 {
 public:
