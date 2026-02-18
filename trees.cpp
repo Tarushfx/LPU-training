@@ -642,3 +642,32 @@ public:
         return root;
     }
 };
+// max path sum
+
+class Solution
+{
+public:
+    int ans = INT_MIN;
+    int maxPathSum(TreeNode *root)
+    {
+        if (!root)
+            return 0;
+        helper(root);
+        return ans;
+    }
+    int helper(TreeNode *root)
+    {
+        if (!root)
+            return 0;
+        int left = helper(root->left);
+        int right = helper(root->right);
+        ans = max(ans, left + root->val);
+        ans = max(ans, right + root->val);
+        ans = max(ans, left + right + root->val);
+        ans = max(ans, root->val);
+        int res = INT_MIN;
+        res = max(0, left);
+        res = max(res, right);
+        return res + root->val;
+    }
+};
