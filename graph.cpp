@@ -207,3 +207,51 @@ public:
         return dfs(graph, visited, source, destination);
     }
 };
+
+// 01 matrix: multi source BFS
+#define pii pair<int, int>
+#define tii tuple<int, int, int>
+class Solution
+{
+public:
+    vector<vector<int>> updateMatrix(vector<vector<int>> &mat)
+    {
+        int N = mat.size(), M = mat[0].size();
+        queue<tii> q;
+        vector<vector<int>> ans(N, vector<int>(M, 0));
+        set<pii> visited;
+        vector<int> directions({-1, 0, 1, 0, -1});
+        for (int r = 0; r < N; r++)
+        {
+            for (int c = 0; c < M; c++)
+            {
+                if (mat[r][c] == 0)
+                {
+                    q.push(make_tuple(r, c, 0));
+                    visited.insert(make_pair(r, c)); // take all sources
+                }
+            }
+        }
+        while (!q.empty())
+        { // multi source BFS
+            auto [r, c, dist] = q.front();
+            q.pop();
+            // process
+            ans[r][c] = dist; // minimum distance from a 0
+            for (int d = 0; d < 4; d++)
+            {
+                // trick to iterate all neighbours
+                int new_r = r + directions[d];
+                int new_c = c + directions[d + 1];
+                if (new_r >= N || new_r < 0 || new_c >= M || new_c < 0)
+                    continue; // boundary check
+                if (visited.find(make_pair(new_r, new_c)) == visited.end())
+                {
+                    q.push({new_r, new_c, dist + 1});
+                    visited.insert(make_pair(new_r, new_c));
+                }
+            }
+        }
+        return ans;
+    }
+};
