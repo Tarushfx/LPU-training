@@ -411,3 +411,44 @@ public:
         return pow(2, -distance[end_node]);
     }
 };
+
+// Path with min effort
+#define pii pair<int, int>
+#define tii tuple<int, int, int>
+class Solution
+{
+public:
+    int minimumEffortPath(vector<vector<int>> &H)
+    {
+        int N = H.size();
+        int M = H[0].size();
+        vector<int> D({-1, 0, 1, 0, -1});
+        priority_queue<tii, vector<tii>, greater<tii>> heap;
+        heap.push({0, 0, 0});
+        vector<vector<int>> distance(N, vector<int>(M, INT_MAX));
+        distance[0][0] = 0;
+        set<pii> visited;
+        while (!heap.empty())
+        {
+            auto [dist, r, c] = heap.top();
+            heap.pop();
+            pii node = make_pair(r, c);
+            if (visited.find(node) != visited.end())
+                continue;
+            visited.insert(node);
+            for (int d = 0; d < 4; d++)
+            {
+                int new_r = r + D[d], new_c = c + D[d + 1];
+                if (new_r < 0 || new_r >= N || new_c < 0 || new_c >= M)
+                    continue;
+                int diff = abs(H[new_r][new_c] - H[r][c]);
+                if (max(diff, dist) <= distance[new_r][new_c])
+                {
+                    distance[new_r][new_c] = max(diff, dist);
+                    heap.push(make_tuple(distance[new_r][new_c], new_r, new_c));
+                }
+            }
+        }
+        return distance[N - 1][M - 1];
+    }
+};
