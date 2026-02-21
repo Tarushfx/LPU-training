@@ -318,3 +318,92 @@ public:
         return ans;
     }
 };
+
+// Network delay time
+
+#define pii pair<int, int>
+class Solution
+{
+public:
+    int networkDelayTime(vector<vector<int>> &times, int n, int k)
+    {
+        priority_queue<pii, vector<pii>, greater<pii>> pq;
+        vector<int> distance(n, INT_MAX);
+        k--;
+        distance[k] = 0;
+        vector<vector<pii>> graph(n, vector<pii>());
+        for (auto time : times)
+        {
+            int u = time[0], v = time[1], w = time[2];
+            graph[u - 1].push_back({v - 1, w});
+        }
+        pq.push({0, k}); // source k
+        vector<bool> visited(n, false);
+        while (!pq.empty())
+        {
+            auto [dist, node] = pq.top();
+            pq.pop();
+            if (visited[node])
+                continue;
+            for (auto [nei, weight] : graph[node])
+            {
+                if (dist + weight < distance[nei])
+                {
+                    // found a better distance
+                    distance[nei] = dist + weight;
+                    pq.push({distance[nei], nei});
+                }
+            }
+        }
+        for (auto x : distance)
+            if (x == INT_MAX)
+                return -1;
+        return *max_element(distance.begin(), distance.end());
+    }
+};
+
+// max probabilty path
+#define pdi pair<double, int>
+#define pid pair<int, double>
+class Solution
+{
+public:
+    double maxProbability(int n, vector<vector<int>> &edges, vector<double> &P, int start_node, int end_node)
+    {
+        int E = edges.size();
+        for (int i = 0; i < E; i++)
+        {
+            P[i] = -log2(P[i]);
+        }
+        vector<vector<pid>> graph(n, vector<pid>());
+        for (int i = 0; i < E; i++)
+        {
+            int u = edges[i][0], v = edges[i][1], w = P[i];
+            graph[u].push_back({v, w});
+        }
+        priority_queue<pdi, vector<pdi>, greater<pdi>> heap;
+        heap.push({0.0, start_node});
+        vector<double> distance(n, -1);
+        set<int> visited;
+        while (!heap.empty())
+        {
+            auto [d, node] = heap.top();
+            heap.pop();
+            if (visited.find(node) != visited.end())
+                continue;
+            visited.insert(node);
+            for (auto [nei, w] : graph[node])
+            {
+                if (distance[nei] == -1 || w + d < distance[nei])
+                {
+                    // realise
+                    distance[nei] = w + d;
+                    heap.push({distance[nei], nei});
+                }
+            }
+        }
+        if (distance[end_node] == -1)
+            return 0.0;
+        return pow(2, -distance[end_node]);
+    }
+};
