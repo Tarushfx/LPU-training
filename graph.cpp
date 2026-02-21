@@ -257,8 +257,8 @@ public:
         return ans;
     }
 };
-// rotten oranges
-#define tii tuple<uint, int, int>
+// rotting oranges
+#define tii tuple<int, int, int>
 class Solution
 {
 public:
