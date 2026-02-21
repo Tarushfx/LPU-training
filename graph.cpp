@@ -374,16 +374,20 @@ public:
         for (int i = 0; i < E; i++)
         {
             P[i] = -log2(P[i]);
+            cout << P[i] << " ";
         }
         vector<vector<pid>> graph(n, vector<pid>());
         for (int i = 0; i < E; i++)
         {
-            int u = edges[i][0], v = edges[i][1], w = P[i];
+            int u = edges[i][0], v = edges[i][1];
+            double w = P[i];
             graph[u].push_back({v, w});
+            graph[v].push_back({u, w});
         }
         priority_queue<pdi, vector<pdi>, greater<pdi>> heap;
         heap.push({0.0, start_node});
-        vector<double> distance(n, -1);
+        vector<double> distance(n, 1e18);
+        distance[start_node] = 0.0;
         set<int> visited;
         while (!heap.empty())
         {
@@ -394,7 +398,7 @@ public:
             visited.insert(node);
             for (auto [nei, w] : graph[node])
             {
-                if (distance[nei] == -1 || w + d < distance[nei])
+                if (w + d < distance[nei])
                 {
                     // realise
                     distance[nei] = w + d;
@@ -402,7 +406,7 @@ public:
                 }
             }
         }
-        if (distance[end_node] == -1)
+        if (distance[end_node] == 1e18)
             return 0.0;
         return pow(2, -distance[end_node]);
     }
