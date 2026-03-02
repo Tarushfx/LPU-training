@@ -143,6 +143,30 @@ public:
         return ans;
     }
 };
+class Solution
+{
+public:
+    vector<int> memo;
+    int coinChange(vector<int> &coins, int T)
+    {
+        memo.resize(T + 1, INT_MAX);
+        memo[0] = 0;
+        for (int i = 0; i <= T; i++)
+        {
+            for (int c : coins)
+            {
+                if (i - c < 0)
+                    continue;
+                if (memo[i - c] == INT_MAX)
+                    continue;
+                memo[i] = min(memo[i], memo[i - c] + 1);
+            }
+        }
+        if (memo[T] == INT_MAX)
+            return -1;
+        return memo[T];
+    }
+};
 
 int main()
 {

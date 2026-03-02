@@ -1,0 +1,41 @@
+Topics:
+    Arrays:
+
+    LinkedList:
+
+    Stack and Queues:
+
+    Binary Trees:
+
+    Trees and Graphs:
+
+    Recursion:
+
+    Sliding window-Dynamic and static:
+
+    Tries:
+
+    Heap:
+
+    Backtracking:
+
+    Dynamic Programming:
+
+    Greedy:
+
+    Bit Manipulation:
+
+
+
+Recources:
+    CSES: Introductory Problems
+    https://cp-algorithms.com/data_structures/disjoint_set_union.html
+    Aditya verma
+    Striver
+    Abdul Bari
+
+
+Blacklisted:
+    shradhha didi
+    Luv babber
+    Aman dhattarwal

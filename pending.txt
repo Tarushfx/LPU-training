@@ -1,0 +1,34 @@
+Topics and patterns:
+    Dynamic programming:
+        Unique Path
+        Longest common subsequence/substring
+        Longest increasing subsequence
+        Longest Palindromic substring
+        Target Sum/ 01 knapsack problem
+        Decode ways
+        Burst balloons: matrix chain multiplication
+        Bitmask DP
+        Digit DP
+    Greedy and intervals
+        Basic Questions
+        Advanced DP on intervals (hard)
+    Backtracking:
+        N queen
+        Permutations
+        Combinations
+    Advanced graphs:
+        Topological sort
+        Bellman ford
+        kruskals MST
+        Prims MST
+        Floyd Warshall
+        Kosaraju for strongly connected components
+    Maths and Geometry:
+        Convex Hull
+        Sweep line
+        Number Theory(optional, but useful)
+    Range Based Data Structures: Pro DSA coder level
+        Segment Trees**
+        Fenwick Trees
+
+     
